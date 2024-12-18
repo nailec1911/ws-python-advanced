@@ -336,6 +336,8 @@ layout: full
 
 # Error handling
 
+<v-clicks>
+
 - Erreur custom
 ```python
 class NegativeValueError(Exception):
@@ -358,7 +360,67 @@ try:
     ...
 except FileNotFoundError as e:
     raise ValueError("something happened") from e
+```
 
+</v-clicks>
+
+
+---
+layout: full
+---
+
+# Tips : iterateurs
+
+<v-clicks>
+
+- ``range()`` : iter from, to, step
+```python
+for i in range(10, 20, 2): # 10, 12, 14, 16, 18
+```
+
+- ``in list``
+```python
+l = ['a', 'b', 'c', 'd']
+for elt in l:
+    # elt will take the value 'a', 'b', 'c', 'd'
+```
+
+- ``enumerate`` : permet d'avoir a la fois l'indice et la valeur
+```python
+l = ['a', 'b', 'c', 'd']
+for i, e in enumerate(l):
+    # i will be 0, 1, 2, 3
+    # e will be a, b, c, d
+```
+
+</v-clicks>
+
+---
+layout: full
+---
+
+# Tips : iterateurs
+
+<v-clicks>
+
+- `zip`: combine deux liste
+```python
+names = ["Alice", "Bob"]  
+scores = [85, 90]  
+zipped = zip(names, score)
+# zipped = [("Alice", 85), ("Bob", 90)]
+for name, score in zipped:  
+    print(f"{name}: {score}") 
+```
+
+-  `map` applique une fonction a chaque élément de la liste
+```python
+nums = [1, 2, 3]  
+squared = list(map(lambda x: x ** 2, nums))
+# squared = 1, 4, 9
+```
+
+</v-clicks>
 
 
 
