@@ -27,14 +27,15 @@ layout: full
 
 # Summary
 
-- venv
+- Virtual environments ``venv``
 - typing
-- params in function (default, kwargs, unpacking)
+- function parameters (default, kwargs, unpacking)
 - error handling
-- coding tips (range, reversed, enumerate, zip, map)
+- Iterators (range, reversed, enumerate, zip, map)
 - lambda
-- decorator
-- generators (yield)
+- decorators
+- documentation
+- generators
 
 ---
 layout: full
@@ -369,7 +370,7 @@ except FileNotFoundError as e:
 layout: full
 ---
 
-# Tips : iterateurs
+# Iterateurs
 
 <v-clicks>
 
@@ -399,7 +400,7 @@ for i, e in enumerate(l):
 layout: full
 ---
 
-# Tips : iterateurs
+# Iterateurs
 
 <v-clicks>
 
@@ -422,6 +423,138 @@ squared = list(map(lambda x: x ** 2, nums))
 
 </v-clicks>
 
+
+---
+layout: full
+---
+
+# Lambdas
+
+<v-clicks>
+
+- Fonction anonyme
+- one liner
+```python
+add4 = lambda a : a + 4
+```
+
+- utile pour les ``map``, ``filter``, ``sort``
+```python
+numbers = [1, 2, 3, 4]
+even_numbers = filter(lambda x: x % 2 == 0, numbers)
+# even_numbers = [2, 4]
+```
+
+```python
+words = ["apple", "banana", "cherry"]
+sorted_words = sorted(words, key=lambda word: len(word))
+# sorted_words = ['apple', 'cherry', 'banana']
+```
+</v-clicks>
+
+---
+layout: full
+---
+
+# Decorators
+
+<v-clicks>
+
+
+- Un décorateur:
+  - prend en paramètre une fonction
+  - renvoie une nouvelle fonction qui étend le comportement de la première
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Before the function call")
+        func()
+        print("After the function call")
+    return wrapper
+
+@my_decorator
+def greet():
+    print("Hello!")
+
+greet()
+# Out:
+# Before the function call
+# Hello
+# After the function call
+```
+
+- Exemple de décorateur pour les classes dans `/examples/decorators.py`
+
+</v-clicks>
+
+---
+layout: two-cols
+---
+
+# Doc
+
+
+- **Docstring** au début des fonctions, classes ou modules
+- Entre **triple quotes (`"""`)**.
+- ``help(<fonction>)`` : affiche la doc d'une fonction
+- ``fonction.__doc__`` : permet d'accéder a la docstring
+
+::right::
+
+
+```python
+class Person:
+    """
+    Represents a person.
+
+    Attributes:
+        name (str): The name of the person.
+        age (int): The age of the person.
+    """
+
+    def __init__(self, name, age):
+        """
+        Initializes the Person instance.
+        
+        Parameters:
+            name (str): The name of the person.
+            age (int): The age of the person.
+        """
+        self.name = name
+        self.age = age
+```
+
+---
+layout: full
+---
+
+# Generators, ``yield``
+
+<v-clicks>
+
+- ``yield`` vs ``return`` :
+  - ``return`` : Mets fin a la fonction est renvoi une valeur.
+  - ``yield`` : Pause la fonction, sauvegarde son état, et renvoie une valeur. Quand la fonction est rapelée elle reprends just après ``yield``.
+
+```python
+def my_generator():
+    i = 0
+    while i < 3:
+        yield i
+        i += 1
+
+# Usage
+gen = my_generator()
+print(next(gen))  # Outputs: 1
+print(next(gen))  # Outputs: 2
+print(next(gen))  # Outputs: 3
+# print(next(gen))  # Raises StopIteration as there are no more values
+```
+
+- peu de place en mémoire
+- permet les listes infinies
+</v-clicks>
 
 
 ---

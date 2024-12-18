@@ -5,13 +5,22 @@ The goal is to help everyone deepen their knowledge in python, learn usefull fea
 
 ## 📚 Overview  
 
-This repository contains:  
+This repository contains:
 
-- 📖 Slides presenting .
-- ✍️ Exercises to practice the material covered during the workshop.  
-- ✅ Solutions to help you verify your implementations.  
+- 📖 Slides presenting advanced stuff in python.
+- ✅ Examples of code with comments in ``examples/``.
 
-## 🛠️ Topics Covered  
+## 🛠️ Topics Covered
+
+- Virtual environments ``venv``
+- typing
+- function parameters (default, kwargs, unpacking)
+- error handling
+- Iterators (range, reversed, enumerate, zip, map)
+- lambda
+- decorators
+- documentation
+- generators (``yield``)
 
 ## Slides
 
