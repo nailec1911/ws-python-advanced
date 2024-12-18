@@ -30,6 +30,7 @@ layout: full
 - venv
 - typing
 - params in function (default, kwargs, unpacking)
+- error handling
 - coding tips (range, reversed, enumerate, zip, map)
 - lambda
 - decorator
@@ -194,6 +195,170 @@ def add(a: int, b: int) -> int:
 print(add(3, "4"))  # Error caught by mypy
 ```
 </v-clicks>
+
+---
+layout: full
+---
+
+# Paramètres
+
+<v-clicks>
+
+- default
+```python
+def greet(name, message="Hello"):
+    print(f"{message}, {name}!")
+
+greet("Charlie")  # Output: Hello, Charlie!
+greet("Charlie", "Hi")  # Output: Hi, Charlie!
+```
+
+- Keywords
+```python
+def greet(name, message="Hello", complement=""):
+    print(f"{message}, {name} {complement}!")
+
+greet("Charlie")  # Output: Hello, Charlie!
+greet("Charlie", message="Hi")  # Output: Hi, Charlie!
+greet("Charlie", complement="noob")  # Output: Hello, Charlie noob!
+greet("Charlie", message="Hi", complement="noob")  # Output: Hi, Charlie noob!
+```
+</v-clicks>
+
+
+---
+layout: full
+---
+
+# Paramètres
+
+
+### **Unpacking**
+
+<v-clicks>
+
+- ``*`` -> list, tuples
+```python
+def add(a, b, c):
+    return a + b + c
+
+nums = [2, 3, 4]
+print(multiply(*nums))  # Output: 9
+```
+
+
+- ``**`` -> dict
+```python
+def greet(name, message):
+    print(f"{message}, {name}!")
+
+details = {"name": "Alice", "message": "Hello"}
+greet(**details)  # Output: Hello, Alice!
+```
+</v-clicks>
+
+
+---
+layout: full
+---
+
+# Error handling
+
+<v-clicks>
+
+- **Try-except** : catch les erreurs
+```python
+try:
+    x = int(input("Enter a number: "))  # This will raise an exception if input is not a number
+    print(f"The number is {x}")
+except ValueError:
+    print("That's not a valid number!")
+```
+
+- Erreur spécifique
+```python
+try:
+    x = int(input("Enter a number: ")) # can raise a ValueError
+    result = 10 / x  # can raise ZeroDivisionError
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+except ValueError:
+    print("Invalid input!")
+```
+
+</v-clicks>
+
+---
+layout: full
+---
+
+# Error handling
+
+- ``else`` : s'execute si il n'y a pas eu d'erreur
+- ``finally`` : s'execute dans tout les cas
+
+```python
+try:
+    file = open("example.txt", "r")  # Try to open a file
+    print(file.read())
+except FileNotFoundError:
+    print("File not found!")
+else:
+    print("File read successfully.")  # Only executes if no exception occurs
+finally:
+    print("Closing the file.")  # Always executes
+    if 'file' in locals():
+        file.close()
+```
+
+---
+layout: full
+---
+
+# Error handling
+
+- ``raise`` : throw des erreurs
+``` python
+def validate_arg(arg: int):
+    if arg < 10:
+        raise ValueError("arg must be > to 10!")
+    print("Valid arg.")
+
+try:
+    validate_arg(15)
+except ValueError as e:
+    print(f"Error: {e}")
+```
+
+---
+layout: full
+---
+
+# Error handling
+
+- Erreur custom
+```python
+class NegativeValueError(Exception):
+    pass
+
+def check_positive(number):
+    if number < 0:
+        raise NegativeValueError("Number must be positive!")
+
+try:
+    check_positive(-5)
+except NegativeValueError as e:
+    print(f"Caught custom exception: {e}")
+```
+
+- ``as`` : assigne l'exception a une variable
+- ``from`` : permet d'cnhainer les exceptions (en gardant le contexte)
+```python
+try:
+    ...
+except FileNotFoundError as e:
+    raise ValueError("something happened") from e
+
 
 
 
